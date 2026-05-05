@@ -1,3 +1,1 @@
-click 820,400
-type 999382
-click 800,500
+click 790,581
