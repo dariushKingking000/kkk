@@ -5,7 +5,10 @@ jobs:
   test-secret:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
+    
     - name: Check Secrets
+      id: test
       env:
         CLIENT_SECRET: ${{ secrets.PIPEdream_CLIENT_SECRET }}
       run: |
@@ -24,11 +27,23 @@ jobs:
         HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
         BODY=$(echo "$RESPONSE" | head -n -1)
         
+        echo "HTTP_CODE=$HTTP_CODE" >> $GITHUB_OUTPUT
+        echo "RESPONSE_BODY<<EOF" >> $GITHUB_OUTPUT
+        echo "$BODY" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+        
         echo "HTTP: $HTTP_CODE"
         echo "Response: $BODY"
+    
+    - name: Save Logs
+      run: |
+        mkdir -p logs
+        echo "Test Log - $(date)" > logs/secret-test-$(date +%Y%m%d-%H%M%S).log
+        echo "HTTP: ${{ steps.test.outputs.HTTP_CODE }}" >> logs/secret-test-$(date +%Y%m%d-%H%M%S).log
+        echo "${{ steps.test.outputs.RESPONSE_BODY }}" >> logs/secret-test-$(date +%Y%m%d-%H%M%S).log
         
-        if [ "$HTTP_CODE" = "200" ]; then
-          echo "✅ Secret درسته!"
-        else
-          echo "❌ Secret اشتباهه!"
-        fi
+    - name: Commit Logs
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "🔍 Secret test logs"
+        file_pattern: logs/*
