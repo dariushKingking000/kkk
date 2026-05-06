@@ -1,1 +1,2 @@
-click 890,592
+click 602,189
+type github
