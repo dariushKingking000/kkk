@@ -2,10 +2,3 @@ type l
 type l
 type l
 type l
-type l
-type l
-type l
-type l
-type l
-type l
-type l
