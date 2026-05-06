@@ -1,1 +1,2 @@
-click 605,514
+type kingking00
+click 1186,631
