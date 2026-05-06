@@ -30,7 +30,7 @@ async function initBrowser() {
     window.chrome = { runtime: {} };
   });
   
-  await page.goto("https://docs.n8n.io/hosting/securing/disable-public-api", { waitUntil: 'networkidle0', timeout: 60000 });
+  await page.goto("https://pipedream.com/auth/signup", { waitUntil: 'networkidle0', timeout: 60000 });
   await wait(10000);
   await page.mouse.move(100, 100);
   console.log("✅ آماده!");
