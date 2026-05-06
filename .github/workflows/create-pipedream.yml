@@ -1,44 +1,34 @@
-name: Create Pipedream Workflow
+name: Test Pipedream Secret
 on: [workflow_dispatch]
 
 jobs:
-  create-workflow:
+  test-secret:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Create Workflow
-      id: pipedream
+    - name: Check Secrets
       env:
-        WORKSPACE_ID: ${{ secrets.PIPEdream_WORKSPACE_ID }}
-        CLIENT_ID: ${{ secrets.PIPEdream_CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.PIPEdream_CLIENT_SECRET }}
       run: |
-        RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "https://api.pipedream.com/v1/workflows" \
+        if [ -z "$CLIENT_SECRET" ] || [ "$CLIENT_SECRET" = "undefined" ]; then
+          echo "❌ PIPEdream_CLIENT_SECRET خالی یا تنظیم نشده!"
+          exit 1
+        fi
+        
+        echo "✅ Secret موجوده (طول: ${#CLIENT_SECRET})"
+        echo "🔍 Test API..."
+        
+        RESPONSE=$(curl -s -w "\n%{http_code}" \
         -H "Authorization: Bearer $CLIENT_SECRET" \
-        -H "Content-Type: application/json" \
-        -d "{\"name\":\"Auto-$(date +%Y%m%d-%H%M)\",\"workspace_id\":\"$WORKSPACE_ID\"}")
+        https://api.pipedream.com/v1/me)
         
         HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
         BODY=$(echo "$RESPONSE" | head -n -1)
         
-        echo "HTTP_CODE=$HTTP_CODE" >> $GITHUB_OUTPUT
-        echo "RESPONSE_BODY<<EOF" >> $GITHUB_OUTPUT
-        echo "$BODY" >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
+        echo "HTTP: $HTTP_CODE"
+        echo "Response: $BODY"
         
-        echo "::notice:: HTTP: $HTTP_CODE"
-        echo "::notice:: Response: $BODY"
-    
-    - name: Save Logs
-      run: |
-        mkdir -p logs
-        echo "Workflow Creation Log - $(date)" > logs/pipedream-$(date +%Y%m%d-%H%M).log
-        echo "HTTP: ${{ steps.pipedream.outputs.HTTP_CODE }}" >> logs/pipedream-$(date +%Y%m%d-%H%M).log
-        echo "${{ steps.pipedream.outputs.RESPONSE_BODY }}" >> logs/pipedream-$(date +%Y%m%d-%H%M).log
-        
-    - name: Commit Logs
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: "📋 Add Pipedream logs $(date +%Y%m%d-%H%M)"
-        file_pattern: logs/*
+        if [ "$HTTP_CODE" = "200" ]; then
+          echo "✅ Secret درسته!"
+        else
+          echo "❌ Secret اشتباهه!"
+        fi
