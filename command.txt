@@ -1,1 +1,1 @@
-click 1330,518
+type k
