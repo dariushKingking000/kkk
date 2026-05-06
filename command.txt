@@ -1,2 +1,2 @@
-type kingking00
-click 1186,631
+click 1188,784
+click 86,178
