@@ -7,17 +7,38 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Create Pipedream Workflow
+    - name: Create Workflow
+      id: pipedream
       env:
-        WORKSPACE_ID: ${{ secrets.PIPEdream_WORKSPACE_ID }}  # zwiRg4
-        CLIENT_ID: ${{ secrets.PIPEdream_CLIENT_ID }}       # kingking00
+        WORKSPACE_ID: ${{ secrets.PIPEdream_WORKSPACE_ID }}
+        CLIENT_ID: ${{ secrets.PIPEdream_CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.PIPEdream_CLIENT_SECRET }}
       run: |
-        curl -X POST "https://api.pipedream.com/v1/workflows" \
+        RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "https://api.pipedream.com/v1/workflows" \
         -H "Authorization: Bearer $CLIENT_SECRET" \
         -H "Content-Type: application/json" \
-        -d '{
-          "name": "My Auto Workflow",
-          "workspace_id": "$WORKSPACE_ID",
-          "source": "github://user/repo/path/to/workflow.js"
-        }'
+        -d "{\"name\":\"Auto-$(date +%Y%m%d-%H%M)\",\"workspace_id\":\"$WORKSPACE_ID\"}")
+        
+        HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+        BODY=$(echo "$RESPONSE" | head -n -1)
+        
+        echo "HTTP_CODE=$HTTP_CODE" >> $GITHUB_OUTPUT
+        echo "RESPONSE_BODY<<EOF" >> $GITHUB_OUTPUT
+        echo "$BODY" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+        
+        echo "::notice:: HTTP: $HTTP_CODE"
+        echo "::notice:: Response: $BODY"
+    
+    - name: Save Logs
+      run: |
+        mkdir -p logs
+        echo "Workflow Creation Log - $(date)" > logs/pipedream-$(date +%Y%m%d-%H%M).log
+        echo "HTTP: ${{ steps.pipedream.outputs.HTTP_CODE }}" >> logs/pipedream-$(date +%Y%m%d-%H%M).log
+        echo "${{ steps.pipedream.outputs.RESPONSE_BODY }}" >> logs/pipedream-$(date +%Y%m%d-%H%M).log
+        
+    - name: Commit Logs
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "📋 Add Pipedream logs $(date +%Y%m%d-%H%M)"
+        file_pattern: logs/*
