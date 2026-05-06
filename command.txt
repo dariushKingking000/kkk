@@ -1,5 +1,1 @@
-click 888,286
-type dariushKingking000
-click 900,372
-type dariushKingking0
-click 888,433
+type 367395
