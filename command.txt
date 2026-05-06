@@ -1,3 +1,5 @@
-click 1167,396
-type dariushKingking000/kkk
-click 1383,503
+click 1351,277
+click 1440,510
+click 1380,584
+type 3
+type 4
