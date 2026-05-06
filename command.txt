@@ -1,1 +1,1 @@
-type l
+click 1167,396
