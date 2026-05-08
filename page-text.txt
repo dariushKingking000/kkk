@@ -1,0 +1,83 @@
+Resources
+File Store
+Variables
+Access
+New
+Connect
+Settings
+Connect
+Production
+
+Pipedream Connect provides a single SDK that lets you add thousands of API integrations directly in your app or AI agent.
+
+Open quickstart
+Read the docs
+Configuration
+Users
+Webhooks
+Configuration
+Project ID
+proj_AVslPRB
+
+Include the project ID when making API requests
+
+Application name
+ 
+
+Your users will see this when connecting their account
+
+Support email
+ 
+
+Provide an email address where your users can reach out for help
+
+Save
+Application logo
+
+Upload your application's logo to present to your end users during the account connection flow. Defaults to Pipedream's logo otherwise.
+
+Upload logo
+Preview
+We use Pipedream
+to connect your account
+Connect securely
+
+Millions of people trust Pipedream to
+keep their data safe.
+
+Connect instantly
+
+Pipedream lets you securely connect
+your account in seconds.
+
+By continuing, you agree to Pipedream's
+Terms of Service and Privacy Policy.
+Continue
+Pipedream has joined Workday
+Learn more
+Untitled Project - 5/8/2026, 7:14 AM
+K
+kingkingplmkoyeb-workspace
+kingkingplmkoyeb@gmail.com
+Search...
+/
+Workspace
+Build with AI
+alpha
+Projects
+Sources
+Accounts
+Data Stores
+Event History
+Settings
+Resources
+Getting Started
+0/4
+Next: Build a workflow
+Free
+Credits Used
+0
+/100
+Active Resources
+Data Stores
+Upgrade
