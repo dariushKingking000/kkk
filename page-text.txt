@@ -15,44 +15,20 @@ Read the docs
 Configuration
 Users
 Webhooks
-Configuration
-Project ID
-proj_AVslPRB
+Users
+Connect account
+EXTERNAL USER ID
+	
+ACCOUNTS
+	
+CREATED
+	
 
-Include the project ID when making API requests
-
-Application name
- 
-
-Your users will see this when connecting their account
-
-Support email
- 
-
-Provide an email address where your users can reach out for help
-
-Save
-Application logo
-
-Upload your application's logo to present to your end users during the account connection flow. Defaults to Pipedream's logo otherwise.
-
-Upload logo
-Preview
-We use Pipedream
-to connect your account
-Connect securely
-
-Millions of people trust Pipedream to
-keep their data safe.
-
-Connect instantly
-
-Pipedream lets you securely connect
-your account in seconds.
-
-By continuing, you agree to Pipedream's
-Terms of Service and Privacy Policy.
-Continue
+user-123
+	
+	
+May 8, 2026, 8:47 AM
+	
 Pipedream has joined Workday
 Learn more
 Untitled Project - 5/8/2026, 7:14 AM
@@ -81,3 +57,17 @@ Credits Used
 Active Resources
 Data Stores
 Upgrade
+Connect Account
+Option 1: Use Connect Link to generate a URL to share with your users
+
+Avoid frontend implementation and generate a Connect Link URL from your server, then deliver it to your users via email, SMS, etc.
+
+https://pipedream.com/_static/connect.html?token=ctok_8035ba98037eb330f75032d8993d6179&connectLink=true&app=github
+
+Connect Link URLs are one-time use and user-specific
+
+Option 2: Use the Pipedream SDK to connect directly from your frontend
+
+You can test the account connection flow with the frontend SDK using your own credentials below. In production, your end users will go through this flow directly from your application.
+
+Connect GitHub
