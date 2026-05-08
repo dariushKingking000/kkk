@@ -1,1 +1,7 @@
-click 498,471
+click 1746,385
+click 781,369
+type github
+click 858,484
+click 756,445
+type user-000
+click 819,550
