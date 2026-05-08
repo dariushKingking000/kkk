@@ -1,3 +1,1 @@
-click 689,308
-click 696,308
-click 583,590
+click 691,247
