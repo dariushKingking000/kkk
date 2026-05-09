@@ -1,1 +1,1 @@
-type webhook
+type 600,900
