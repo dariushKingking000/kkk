@@ -1,79 +1,29 @@
+LIVE EVENTS
+Today
+02:15:44 PM
+01:15:46 PM
+12:15:47 PM
+
+Upgrade
+ for extended event history.
+
+Clear All
+Load more
 trigger
 Every 1 hour
 custom_request
 Send any HTTP Request
 trigger
-custom_request
-CONFIGURE
-HTTP Request Configuration
-*
-http_request
-Import cURL
-GET
-POST
-PUT
-PATCH
-DELETE
-HEAD
-OPTIONS
-https://pokeapi.co/api/v2/pokemon/charizard
-Auth
-Params
-Headers 
-(1)
-Body
-Authorization Type
-HTTP / Webhook
-None
-Basic Auth
-Bearer Token
-Select an app
-Optional Fields
-Include Response Headers
-RESULTS
-Success
-Reference exports in future steps via the steps object
-Exports
-Inputs
-Logs
-Details
-steps.custom_request
-{1}
-$return_value
-{21}
-abilities
-[2]
-base_experience:
-240
-cries
-{2}
-forms
-[1]
-game_indices
-[20]
-height:
-17
-Copy Path
-•
-Copy Value
-held_items
-[0]
-id:
-6
-is_default:
-true
-location_area_encounters:
-https://pokeapi.co/api/v2/pokemon/6/encounters
--more-
-Test
-Deploy
+INSPECT
+New scheduled events:
+Every 1 hour
+Run now
 Pipedream has joined Workday
 Learn more
 PLAUSIBLE-UNDAMAGED-BOLD
-EDIT
-Exit build mode
+Back to project
 Untitled Workflow - 5/6/2026, 9:40 AM
-Draft
-Ready to deploy
+v2
+Active
 Edit with AI
-Deploy
+Edit
