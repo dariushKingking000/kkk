@@ -1,4 +1,2 @@
-copy
-click 1113,290
-click 1389,574
-click 1389,574
+copy 
+click 1572,1048
