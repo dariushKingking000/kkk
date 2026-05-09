@@ -1,2 +1,1 @@
-click 890,592
-type webhook
+click 1275,273
