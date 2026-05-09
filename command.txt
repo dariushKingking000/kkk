@@ -1,6 +1,2 @@
 click 377,172
-click 890,592
-click 875,318
-click 1186,872
-click 602,189
-type webhook
+click 377,172
