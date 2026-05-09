@@ -1,1 +1,1 @@
-type webhook
+click 500,280
