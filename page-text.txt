@@ -1,73 +1,41 @@
-Resources
-File Store
-Variables
-Access
-New
-Connect
-Settings
-Connect
-Production
-
-Pipedream Connect provides a single SDK that lets you add thousands of API integrations directly in your app or AI agent.
-
-Open quickstart
-Read the docs
-Configuration
-Users
-Webhooks
-Users
-Connect account
-EXTERNAL USER ID
-	
-ACCOUNTS
-	
-CREATED
-	
-
-user-123
-	
-	
-May 8, 2026, 8:47 AM
-	
+trigger
+Every 1 hour
+Send any HTTP Request
+trigger
+custom_request
+CONFIGURE
+HTTP Request Configuration
+*
+http_request
+Import cURL
+GET
+POST
+PUT
+PATCH
+DELETE
+HEAD
+OPTIONS
+https://pokeapi.co/api/v2/pokemon/charizard
+Auth
+Params
+Headers 
+(1)
+Body
+Authorization Type
+HTTP / Webhook
+None
+Basic Auth
+Bearer Token
+Select an app
+Optional Fields
+Include Response Headers
+Test
 Pipedream has joined Workday
 Learn more
-Untitled Project - 5/8/2026, 7:14 AM
-K
-kingkingplmkoyeb-workspace
-kingkingplmkoyeb@gmail.com
-Search...
-/
-Workspace
-Build with AI
-alpha
-Projects
-Sources
-Accounts
-Data Stores
-Event History
-Settings
-Resources
-Getting Started
-0/4
-Next: Build a workflow
-Free
-Credits Used
-0
-/100
-Active Resources
-Data Stores
-Upgrade
-Connect Account
-Option 1: Use Connect Link to generate a URL to share with your users
-
-Avoid frontend implementation and generate a Connect Link URL from your server, then deliver it to your users via email, SMS, etc.
-
-https://pipedream.com/_static/connect.html?token=ctok_8035ba98037eb330f75032d8993d6179&connectLink=true&app=github
-
-Connect Link URLs are one-time use and user-specific
-
-Option 2: Use the Pipedream SDK to connect directly from your frontend
-
-You can test the account connection flow with the frontend SDK using your own credentials below. In production, your end users will go through this flow directly from your application.
-
-Connect GitHub
+PLAUSIBLE-UNDAMAGED-BOLD
+EDIT
+Exit build mode
+Untitled Workflow - 5/6/2026, 9:40 AM
+Draft
+Edit with AI
+Deploy
