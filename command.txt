@@ -1,3 +1,4 @@
-type webhook
-click 500,280
-click 615,276
+copy
+click 1113,290
+click 1389,574
+click 1389,574
