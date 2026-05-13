@@ -1,10 +1,10 @@
-name: Download Wush Binary to Repo
+name: Download Wush Binary
 
 on:
   workflow_dispatch:
 
 jobs:
-  download-wush:
+  download:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -15,22 +15,31 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Get latest Wush download URL and download
+      - name: Download and extract Wush for Windows AMD64
         run: |
-          # از API گیتهاب آخرین آدرس دانلود رو میگیره
-          DOWNLOAD_URL=$(curl -s https://api.github.com/repos/coder/wush/releases/latest | grep -o "https://github.com/coder/wush/releases/download/.*/wush_.*_windows_amd64.exe" | head -1)
+          # دانلود فایل زیپ مخصوص ویندوز 64 بیتی
+          curl -L -o wush.zip "https://github.com/coder/wush/releases/download/v0.4.1/wush_0.4.1_windows_amd64.zip"
           
-          echo "Downloading from: $DOWNLOAD_URL"
-          curl -L -o wush.exe "$DOWNLOAD_URL"
+          # استخراج فایل wush.exe از داخل زیپ
+          unzip -o wush.zip
           
-          # چک کن که فایل دانلود شده یا نه
+          # پیدا کردن فایل exe و انتقال به ریشه
+          find . -name "wush.exe" -exec mv {} ./wush.exe \; 2>/dev/null || true
+          
+          # پاک کردن فایل زیپ
+          rm -f wush.zip
+          
+          # حذف پوشه‌های اضافی
+          rm -rf wush_* 2>/dev/null || true
+          
+          # چک کن که فایل هست
+          echo "✅ فایل wush.exe دانلود و استخراج شد:"
           ls -la wush.exe
-          file wush.exe
       
-      - name: Commit and push to repo
+      - name: Commit and push to repository
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add wush.exe
-          git commit -m "Add wush.exe binary [skip ci]" || echo "No changes to commit"
+          git commit -m "Add wush.exe for Windows AMD64 [skip ci]" || echo "No changes to commit"
           git push
