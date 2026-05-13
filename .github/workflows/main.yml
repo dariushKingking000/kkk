@@ -1,27 +1,32 @@
 name: Download and Commit File
 
 on:
-  workflow_dispatch:  # اجرای دستی
+  workflow_dispatch:
 
 jobs:
   download:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 🔑 این خیلی مهم است - دسترسی نوشتن می‌دهد
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # توکن خودکار گیت‌هاب
       
       - name: Download file
         run: |
-          # دانلود فایل مورد نظر
-          curl -L -o downloaded-file.txt "https://example.com/file.txt"
-          # یا برای فایل wush:
-          # curl -L -o wush.exe "https://github.com/coder/wush/releases/download/v0.4.1/wush_0.4.1_windows_amd64.exe"
+          # دانلود فایل wush برای ویندوز
+          curl -L -o wush.exe "https://github.com/coder/wush/releases/download/v0.4.1/wush_0.4.1_windows_amd64.exe"
+          
+          # ببین فایل دانلود شده یا نه
+          ls -la wush.exe
       
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add downloaded-file.txt
-          git commit -m "Add downloaded file [skip ci]" || echo "No changes to commit"
+          git add wush.exe
+          git commit -m "Add wush.exe [skip ci]" || echo "No changes to commit"
           git push
