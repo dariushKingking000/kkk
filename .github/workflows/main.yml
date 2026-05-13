@@ -1,32 +1,36 @@
-name: Download and Commit File
+name: Download Wush Binary to Repo
 
 on:
   workflow_dispatch:
 
 jobs:
-  download:
+  download-wush:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 🔑 این خیلی مهم است - دسترسی نوشتن می‌دهد
+      contents: write
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # توکن خودکار گیت‌هاب
+          token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Download file
+      - name: Get latest Wush download URL and download
         run: |
-          # دانلود فایل wush برای ویندوز
-          curl -L -o wush.exe "https://github.com/coder/wush/releases/download/v0.4.1/wush_0.4.1_windows_amd64.exe"
+          # از API گیتهاب آخرین آدرس دانلود رو میگیره
+          DOWNLOAD_URL=$(curl -s https://api.github.com/repos/coder/wush/releases/latest | grep -o "https://github.com/coder/wush/releases/download/.*/wush_.*_windows_amd64.exe" | head -1)
           
-          # ببین فایل دانلود شده یا نه
+          echo "Downloading from: $DOWNLOAD_URL"
+          curl -L -o wush.exe "$DOWNLOAD_URL"
+          
+          # چک کن که فایل دانلود شده یا نه
           ls -la wush.exe
+          file wush.exe
       
-      - name: Commit and push
+      - name: Commit and push to repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add wush.exe
-          git commit -m "Add wush.exe [skip ci]" || echo "No changes to commit"
+          git commit -m "Add wush.exe binary [skip ci]" || echo "No changes to commit"
           git push
