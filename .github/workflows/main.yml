@@ -1,12 +1,27 @@
-name: "Wush Remote Access"
+name: Download and Commit File
 
 on:
-  workflow_dispatch:    # یعنی با زدن دکمه "Run workflow" در گیتهاب، این کار اجرا شود
+  workflow_dispatch:  # اجرای دستی
 
 jobs:
-  wush:
+  download:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Start Wush Session
-        uses: coder/wush-action@v1.0.0
-        timeout-minutes: 30   # یعنی این اتصال 30 دقیقه باز می‌ماند
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Download file
+        run: |
+          # دانلود فایل مورد نظر
+          curl -L -o downloaded-file.txt "https://example.com/file.txt"
+          # یا برای فایل wush:
+          # curl -L -o wush.exe "https://github.com/coder/wush/releases/download/v0.4.1/wush_0.4.1_windows_amd64.exe"
+      
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add downloaded-file.txt
+          git commit -m "Add downloaded file [skip ci]" || echo "No changes to commit"
+          git push
